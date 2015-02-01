@@ -3,13 +3,13 @@ namespace Computation\SmallStepSemantics\Tests;
 
 use Computation\SmallStepSemantics\Expressions\Add;
 use Computation\SmallStepSemantics\Expressions\Boolean;
-use Computation\SmallStepSemantics\Statements\Conditional;
-use Computation\SmallStepSemantics\Expressions\Multiply;
-use Computation\SmallStepSemantics\Expressions\Number;
 use Computation\SmallStepSemantics\Expressions\GetVariable;
 use Computation\SmallStepSemantics\Expressions\LessThan;
+use Computation\SmallStepSemantics\Expressions\Multiply;
+use Computation\SmallStepSemantics\Expressions\Number;
 use Computation\SmallStepSemantics\Machine;
 use Computation\SmallStepSemantics\Statements\AssignVariable;
+use Computation\SmallStepSemantics\Statements\Conditional;
 use Computation\SmallStepSemantics\Statements\DoNothing;
 use Computation\SmallStepSemantics\Statements\Loop;
 use Computation\SmallStepSemantics\Statements\Sequence;

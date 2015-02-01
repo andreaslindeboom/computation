@@ -4,7 +4,6 @@ namespace Computation\SmallStepSemantics\Statements;
 use Computation\SmallStepSemantics\Base\Expression;
 use Computation\SmallStepSemantics\Base\Reducible;
 use Computation\SmallStepSemantics\Base\Statement;
-use Computation\SmallStepSemantics\Statements\Conditional;
 
 class Loop extends Statement
 {

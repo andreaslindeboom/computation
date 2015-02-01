@@ -16,5 +16,4 @@ abstract class Statement
      * @return string
      */
     abstract public function __toString();
-
 }
