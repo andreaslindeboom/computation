@@ -3,12 +3,14 @@ namespace Computation\SmallStepSemantics\Tests;
 
 use Computation\SmallStepSemantics\Elements\Add;
 use Computation\SmallStepSemantics\Elements\Boolean;
+use Computation\SmallStepSemantics\Elements\Conditional;
 use Computation\SmallStepSemantics\Elements\Multiply;
 use Computation\SmallStepSemantics\Elements\Number;
 use Computation\SmallStepSemantics\Elements\GetVariable;
 use Computation\SmallStepSemantics\Elements\LessThan;
 use Computation\SmallStepSemantics\Machine;
 use Computation\SmallStepSemantics\Statements\AssignVariable;
+use Computation\SmallStepSemantics\Statements\DoNothing;
 
 class MachineTest extends \PHPUnit_Framework_TestCase {
 
@@ -228,5 +230,53 @@ class MachineTest extends \PHPUnit_Framework_TestCase {
         list($actual, $environment) = $machine->run();
 
         $this->assertEquals(new Number(3), $environment[$testLabel]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReduceConsequenceIfConditionEqualsTrue()
+    {
+        $machine = new Machine(
+            new Conditional(
+                new Boolean(true),
+                new AssignVariable(
+                    'foo',
+                    new Add(
+                        new Number(1),
+                        new Number(2)
+                    )
+                ),
+                new DoNothing()
+            )
+        );
+
+        list ($actual, $environment) = $machine->run();
+
+        $this->assertEquals(new Number(3), $environment['foo']);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReduceAlternativeIfConditionEqualsFalse()
+    {
+        $machine = new Machine(
+            new Conditional(
+                new Boolean(false),
+                new AssignVariable(
+                    'foo',
+                    new Add(
+                        new Number(1),
+                        new Number(2)
+                    )
+                ),
+                new DoNothing()
+            )
+        );
+
+        list ($actual, $environment) = $machine->run();
+
+        $this->assertEquals(false, isset($environment['foo']));
     }
 }

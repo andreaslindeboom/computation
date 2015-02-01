@@ -61,7 +61,7 @@ class Machine
      */
     private function reportExpression()
     {
-        return str_pad($this->expression, 20);
+        return str_pad($this->expression, 80);
     }
 
 }
