@@ -20,12 +20,14 @@ class Add extends Element
     public function reduce($environment)
     {
         if ($this->left->isReducible()) {
-            $this->left = $this->left->reduce($environment);
+            list($this->left, $environment) = $this->left->reduce($environment);
+            return [$this, $environment];
         }
         if ($this->right->isReducible()) {
-            $this->right = $this->right->reduce($environment);
+            list($this->right, $environment) = $this->right->reduce($environment);
+            return [$this, $environment];
         }
-        return new Number($this->left->getValue()  + $this->right->getValue());
+        return [new Number($this->left->getValue()  + $this->right->getValue()), $environment];
     }
 
     /**

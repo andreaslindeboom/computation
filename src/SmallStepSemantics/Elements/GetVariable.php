@@ -25,6 +25,6 @@ class GetVariable extends Element
 
     public function reduce($environment)
     {
-        return $environment[$this->variableName];
+        return [$environment[$this->variableName], $environment];
     }
 }

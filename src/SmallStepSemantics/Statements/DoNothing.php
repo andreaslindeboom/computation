@@ -1,24 +1,18 @@
 <?php
 namespace Computation\SmallStepSemantics\Statements;
 
-use Computation\SmallStepSemantics\Base\Element;
+use Computation\SmallStepSemantics\Base\NotReducible;
+use Computation\SmallStepSemantics\Base\Statement;
 
-class DoNothing extends Element
+class DoNothing extends Statement
 {
-
-    /**
-     * @return boolean
-     */
-    public function isReducible()
-    {
-        // TODO: Implement isReducible() method.
-    }
+    use NotReducible;
 
     /**
      * @return string
      */
     public function __toString()
     {
-        // TODO: Implement __toString() method.
+        return "do nothing";
     }
 }

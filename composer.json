@@ -10,7 +10,7 @@
         }
     ],
     "autoload": {
-        "psr-0": {"Computation\\": "src/"}
+        "psr-4": {"Computation\\": "src/"}
     },
     "require": {}
 }

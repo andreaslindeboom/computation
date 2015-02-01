@@ -27,13 +27,13 @@ class LessThan extends Element
     public function reduce($environment)
     {
         if ($this->left->isReducible()) {
-            $this->left = $this->left->reduce($environment);
-            return $this;
+            list($this->left, $environment) = $this->left->reduce($environment);
+            return [$this, $environment];
         }
         if ($this->right->isReducible()) {
-            $this->right = $this->right->reduce($environment);
-            return $this;
+            list($this->right, $environment) = $this->right->reduce($environment);
+            return [$this, $environment];
         }
-        return new Boolean($this->left < $this->right ? true : false);
+        return [new Boolean($this->left < $this->right ? true : false), $environment];
     }
 }
