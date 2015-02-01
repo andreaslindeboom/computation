@@ -1,0 +1,16 @@
+{
+    "name": "linden3/computation",
+    "require-dev": {
+        "phpunit/phpunit": "~4.4"
+    },
+    "authors": [
+        {
+            "name": "Andreas Lindeboom",
+            "email": "andreas@linden3.nl"
+        }
+    ],
+    "autoload": {
+        "psr-0": {"Computation\\": "src/"}
+    },
+    "require": {}
+}
