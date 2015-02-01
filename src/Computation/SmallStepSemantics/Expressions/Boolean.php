@@ -1,10 +1,10 @@
 <?php
 namespace Computation\SmallStepSemantics\Expressions;
 
-use Computation\SmallStepSemantics\Base\Element;
+use Computation\SmallStepSemantics\Base\Expression;
 use Computation\SmallStepSemantics\Base\NotReducible;
 
-class Boolean extends Element
+class Boolean extends Expression
 {
     use NotReducible;
 

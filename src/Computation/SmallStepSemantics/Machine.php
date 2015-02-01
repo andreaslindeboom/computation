@@ -17,7 +17,7 @@ class Machine
         $instructionCounter = 1;
 
         echo PHP_EOL . "~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*" . PHP_EOL . PHP_EOL;
-        while ($this->expression->isReducible()) {
+        while ($this->expression->isReducible() && $instructionCounter < 20) {
             $this->report($instructionCounter);
 
             $this->step();

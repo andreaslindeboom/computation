@@ -5,7 +5,7 @@ namespace Computation\SmallStepSemantics\Base;
  * Class Element
  * @package SmallStepSemantics
  */
-abstract class Element
+abstract class Expression
 {
     /**
      * @return boolean

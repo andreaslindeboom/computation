@@ -1,16 +1,16 @@
 <?php
 namespace Computation\SmallStepSemantics\Expressions;
 
-use Computation\SmallStepSemantics\Base\Element;
+use Computation\SmallStepSemantics\Base\Expression;
 use Computation\SmallStepSemantics\Base\Reducible;
 
-class LessThan extends Element
+class LessThan extends Expression
 {
     use Reducible;
 
     private $left, $right;
 
-    public function __construct(Element $left, Element $right)
+    public function __construct(Expression $left, Expression $right)
     {
         $this->left = $left;
         $this->right = $right;

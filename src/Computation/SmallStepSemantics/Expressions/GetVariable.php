@@ -1,10 +1,10 @@
 <?php
 namespace Computation\SmallStepSemantics\Expressions;
 
-use Computation\SmallStepSemantics\Base\Element;
+use Computation\SmallStepSemantics\Base\Expression;
 use Computation\SmallStepSemantics\Base\Reducible;
 
-class GetVariable extends Element
+class GetVariable extends Expression
 {
     use Reducible;
 
@@ -20,7 +20,7 @@ class GetVariable extends Element
      */
     public function __toString()
     {
-        return "get:$this->variableName";
+        return "$this->variableName";
     }
 
     public function reduce($environment)

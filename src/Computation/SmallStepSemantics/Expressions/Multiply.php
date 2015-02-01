@@ -1,17 +1,17 @@
 <?php
 namespace Computation\SmallStepSemantics\Expressions;
 
-use Computation\SmallStepSemantics\Base\Element;
+use Computation\SmallStepSemantics\Base\Expression;
 use Computation\SmallStepSemantics\Base\Reducible;
 use Computation\SmallStepSemantics\ReducibleElement;
 
-class Multiply extends Element
+class Multiply extends Expression
 {
     use Reducible;
 
     private $left, $right;
 
-    public function __construct(Element $left, Element $right)
+    public function __construct(Expression $left, Expression $right)
     {
         $this->left = $left;
         $this->right = $right;

@@ -11,6 +11,7 @@ use Computation\SmallStepSemantics\Expressions\LessThan;
 use Computation\SmallStepSemantics\Machine;
 use Computation\SmallStepSemantics\Statements\AssignVariable;
 use Computation\SmallStepSemantics\Statements\DoNothing;
+use Computation\SmallStepSemantics\Statements\Loop;
 use Computation\SmallStepSemantics\Statements\Sequence;
 
 class MachineTest extends \PHPUnit_Framework_TestCase {
@@ -303,5 +304,60 @@ class MachineTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertEquals($testNumber1, $environment[$testLabel1]);
         $this->assertEquals($testNumber2, $environment[$testLabel2]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetVariableSetInSameSequence()
+    {
+        $testNumber1 = new Number(1);
+        $testNumber2 = new Number(2);
+        $testNumber3 = new Number(3);
+
+        $testLabel1 = 'foo';
+        $testLabel2 = 'bar';
+
+        $machine = new Machine(
+            new Sequence(
+                new AssignVariable($testLabel1, $testNumber1),
+                new AssignVariable($testLabel2, new Add(
+                    new GetVariable($testLabel1),
+                    $testNumber2
+                ))
+            )
+        );
+
+        list ($actual, $environment) = $machine->run();
+
+        $this->assertEquals($testNumber1, $environment[$testLabel1]);
+        $this->assertEquals($testNumber3, $environment[$testLabel2]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDiscontinueLoopWhenConditionFalse()
+    {
+        $machine = new Machine(
+            new Loop(
+                new LessThan(
+                    new GetVariable('i'),
+                    new Number(10)
+                ),
+                new AssignVariable(
+                    'i',
+                    new Add(
+                        new getVariable('i'),
+                        new Number(1)
+                    )
+                )
+            ),
+            ['i' => new Number(0)]
+        );
+
+        list ($actual, $environment) = $machine->run();
+
+        $this->assertEquals(new Number(10), $environment['i']);
     }
 }

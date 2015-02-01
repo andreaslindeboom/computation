@@ -36,6 +36,6 @@ class AssignVariable extends Statement
      */
     public function __toString()
     {
-        return "set: $this->variableName ($this->value)";
+        return "$this->variableName = $this->value";
     }
 }
