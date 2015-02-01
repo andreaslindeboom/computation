@@ -19,12 +19,14 @@ class Sequence extends Statement
     public function reduce($environment)
     {
         if ($this->first != new DoNothing()) {
-            list($this->first, $environment) = $this->first->reduce($environment);
-            return [$this, $environment];
+            $first = clone $this->first;
+            list($first, $environment) = $first->reduce($environment);
+            return [new Sequence($first, $this->second), $environment];
         }
         if ($this->second != new DoNothing()) {
-            list($this->second, $environment) = $this->second->reduce($environment);
-            return [$this, $environment];
+            $second = clone $this->second;
+            list($second, $environment) = $second->reduce($environment);
+            return [new Sequence($this->first, $second), $environment];
         }
         return [new DoNothing(), $environment];
     }

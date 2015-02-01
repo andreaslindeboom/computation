@@ -27,12 +27,16 @@ class LessThan extends Expression
     public function reduce($environment)
     {
         if ($this->left->isReducible()) {
-            list($this->left, $environment) = $this->left->reduce($environment);
-            return [$this, $environment];
+            $left = clone $this->left;
+
+            list($left, $environment) = $left->reduce($environment);
+            return [new LessThan($left, $this->right), $environment];
         }
         if ($this->right->isReducible()) {
-            list($this->right, $environment) = $this->right->reduce($environment);
-            return [$this, $environment];
+            $right = clone $this->right;
+
+            list($right, $environment) = $right->reduce($environment);
+            return [new LessThan($this->left, $right), $environment];
         }
         return [new Boolean($this->left < $this->right ? true : false), $environment];
     }

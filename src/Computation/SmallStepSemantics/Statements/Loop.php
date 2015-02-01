@@ -4,7 +4,7 @@ namespace Computation\SmallStepSemantics\Statements;
 use Computation\SmallStepSemantics\Base\Expression;
 use Computation\SmallStepSemantics\Base\Reducible;
 use Computation\SmallStepSemantics\Base\Statement;
-use Computation\SmallStepSemantics\Expressions\Conditional;
+use Computation\SmallStepSemantics\Statements\Conditional;
 
 class Loop extends Statement
 {
@@ -32,7 +32,7 @@ class Loop extends Statement
             new Conditional(
                 // if condition is not cloned, the reference will get reduced and the rest of the loop will work
                 // with hardcoded values instead of variables.
-                clone $this->condition,
+                $this->condition,
                 new Sequence(
                     $this->body,
                     $this

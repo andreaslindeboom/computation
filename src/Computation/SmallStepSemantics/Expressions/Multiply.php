@@ -20,12 +20,14 @@ class Multiply extends Expression
     public function reduce($environment)
     {
         if ($this->left->isReducible()) {
-            list($this->left, $environment) = $this->left->reduce($environment);
-            return [$this, $environment];
+            $left = clone $this->left;
+            list($left, $environment) = $left->reduce($environment);
+            return [new Multiply($left, $this->right), $environment];
         }
         if ($this->right->isReducible()) {
-            list($this->right, $environment) = $this->right->reduce($environment);
-            return [$this, $environment];
+            $right = clone $this->right;
+            list($right, $environment) = $right->reduce($environment);
+            return [new Multiply($this->left, $right), $environment];
         }
         return [new Number($this->left->getValue() * $this->right->getValue()), $environment];
     }

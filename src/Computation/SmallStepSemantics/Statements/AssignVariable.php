@@ -22,8 +22,9 @@ class AssignVariable extends Statement
         // To be determined: what do we want, reduce on read or reduce on write? for now, going with reduce on write.
         // If we want reduce on read we can comment this out.
         if ($this->value->isReducible()) {
-            list($this->value, $environment) = $this->value->reduce($environment);
-            return [$this, $environment];
+            $value = clone $this->value;
+            list($value, $environment) = $value->reduce($environment);
+            return [new AssignVariable($this->variableName, $value), $environment];
         }
 
         $environment[$this->variableName] = $this->value;

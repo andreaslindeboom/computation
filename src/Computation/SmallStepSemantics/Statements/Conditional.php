@@ -1,12 +1,12 @@
 <?php
-namespace Computation\SmallStepSemantics\Expressions;
+namespace Computation\SmallStepSemantics\Statements;
 
 use Computation\SmallStepSemantics\Base\Expression;
 use Computation\SmallStepSemantics\Base\Reducible;
 use Computation\SmallStepSemantics\Base\Statement;
-use Computation\SmallStepSemantics\Statements\DoNothing;
+use Computation\SmallStepSemantics\Expressions\Boolean;
 
-class Conditional extends Expression
+class Conditional extends Statement
 {
     use Reducible;
 
@@ -35,8 +35,9 @@ class Conditional extends Expression
     public function reduce($environment)
     {
         if ($this->condition->isReducible()) {
-            list($this->condition, $environment) = $this->condition->reduce($environment);
-            return [$this, $environment];
+            $condition = clone $this->condition;
+            list($condition, $environment) = $condition->reduce($environment);
+            return [new Conditional($condition, $this->consequence, $this->alternative), $environment];
         }
         if ($this->condition == new Boolean(true)) {
             return [$this->consequence, $environment];

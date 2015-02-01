@@ -3,7 +3,7 @@ namespace Computation\SmallStepSemantics\Tests;
 
 use Computation\SmallStepSemantics\Expressions\Add;
 use Computation\SmallStepSemantics\Expressions\Boolean;
-use Computation\SmallStepSemantics\Expressions\Conditional;
+use Computation\SmallStepSemantics\Statements\Conditional;
 use Computation\SmallStepSemantics\Expressions\Multiply;
 use Computation\SmallStepSemantics\Expressions\Number;
 use Computation\SmallStepSemantics\Expressions\GetVariable;
