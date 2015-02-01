@@ -1,5 +1,5 @@
 <?php
-namespace Computation\SmallStepSemantics\Elements;
+namespace Computation\SmallStepSemantics\Expressions;
 
 use Computation\SmallStepSemantics\Base\Element;
 use Computation\SmallStepSemantics\Base\Reducible;

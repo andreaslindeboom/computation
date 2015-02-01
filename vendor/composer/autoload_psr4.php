@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Computation\\' => array($baseDir . '/src'),
+    '' => array($baseDir . '/src'),
 );

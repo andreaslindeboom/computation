@@ -16,7 +16,7 @@ class Machine
     {
         $instructionCounter = 1;
 
-        echo "~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*" . PHP_EOL . PHP_EOL;
+        echo PHP_EOL . "~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*" . PHP_EOL . PHP_EOL;
         while ($this->expression->isReducible()) {
             $this->report($instructionCounter);
 
@@ -53,7 +53,7 @@ class Machine
             array_push($output, "$label: $value");
         }
 
-        return "{" . implode(",", $output) . "}";
+        return "{" . implode(", ", $output) . "}";
     }
 
     /**

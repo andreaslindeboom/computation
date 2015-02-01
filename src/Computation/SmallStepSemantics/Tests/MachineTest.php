@@ -1,16 +1,17 @@
 <?php
 namespace Computation\SmallStepSemantics\Tests;
 
-use Computation\SmallStepSemantics\Elements\Add;
-use Computation\SmallStepSemantics\Elements\Boolean;
-use Computation\SmallStepSemantics\Elements\Conditional;
-use Computation\SmallStepSemantics\Elements\Multiply;
-use Computation\SmallStepSemantics\Elements\Number;
-use Computation\SmallStepSemantics\Elements\GetVariable;
-use Computation\SmallStepSemantics\Elements\LessThan;
+use Computation\SmallStepSemantics\Expressions\Add;
+use Computation\SmallStepSemantics\Expressions\Boolean;
+use Computation\SmallStepSemantics\Expressions\Conditional;
+use Computation\SmallStepSemantics\Expressions\Multiply;
+use Computation\SmallStepSemantics\Expressions\Number;
+use Computation\SmallStepSemantics\Expressions\GetVariable;
+use Computation\SmallStepSemantics\Expressions\LessThan;
 use Computation\SmallStepSemantics\Machine;
 use Computation\SmallStepSemantics\Statements\AssignVariable;
 use Computation\SmallStepSemantics\Statements\DoNothing;
+use Computation\SmallStepSemantics\Statements\Sequence;
 
 class MachineTest extends \PHPUnit_Framework_TestCase {
 
@@ -278,5 +279,29 @@ class MachineTest extends \PHPUnit_Framework_TestCase {
         list ($actual, $environment) = $machine->run();
 
         $this->assertEquals(false, isset($environment['foo']));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldAssignMultipleVariablesInSequence()
+    {
+        $testNumber1 = new Number(1);
+        $testNumber2 = new Number(2);
+
+        $testLabel1 = 'foo';
+        $testLabel2 = 'bar';
+
+        $machine = new Machine(
+            new Sequence(
+                new AssignVariable($testLabel1, $testNumber1),
+                new AssignVariable($testLabel2, $testNumber2)
+            )
+        );
+
+        list ($actual, $environment) = $machine->run();
+
+        $this->assertEquals($testNumber1, $environment[$testLabel1]);
+        $this->assertEquals($testNumber2, $environment[$testLabel2]);
     }
 }

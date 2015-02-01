@@ -1,7 +1,7 @@
 <phpunit bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="Computation">
-            <directory>src/SmallStepSemantics/Tests</directory>
+            <directory>src/Computation/SmallStepSemantics/Tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

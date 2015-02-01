@@ -1,11 +1,10 @@
 <?php
-namespace Computation\SmallStepSemantics\Elements;
+namespace Computation\SmallStepSemantics\Expressions;
 
 use Computation\SmallStepSemantics\Base\Element;
 use Computation\SmallStepSemantics\Base\Reducible;
-use Computation\SmallStepSemantics\ReducibleElement;
 
-class Multiply extends Element
+class LessThan extends Element
 {
     use Reducible;
 
@@ -15,6 +14,14 @@ class Multiply extends Element
     {
         $this->left = $left;
         $this->right = $right;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return "$this->left < $this->right";
     }
 
     public function reduce($environment)
@@ -27,14 +34,6 @@ class Multiply extends Element
             list($this->right, $environment) = $this->right->reduce($environment);
             return [$this, $environment];
         }
-        return [new Number($this->left->getValue() * $this->right->getValue()), $environment];
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return "($this->left * $this->right)";
+        return [new Boolean($this->left < $this->right ? true : false), $environment];
     }
 }
