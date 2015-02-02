@@ -2,6 +2,7 @@
     <testsuites>
         <testsuite name="Computation">
             <directory>src/Computation/SmallStepSemantics/Tests</directory>
+            <directory>src/Computation/BigStepSemantics/Tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>
